@@ -35,9 +35,8 @@ dirY = 0
 planeX = 0
 planeY = 0.66
 
-w = 800
-h = 600
-  --love.window.setMode (w, h, {resizable=true, minwidth=400, minheight=300})
+
+  love.window.setMode (800, 600, {resizable=true, minwidth=400, minheight=300})
 
 
 drawScreenLineStart = {}
@@ -46,6 +45,8 @@ drawScreenLineColor = {}
 end
 
 function love.update (dt)
+  w, h = love.graphics.getDimensions()
+
   for x = 0, w, 1 do
     local cameraX = 2 * x / w - 1
     local rayPosX = posX
