@@ -1,4 +1,6 @@
 function love.load ()
+sensitivity = 400
+mouseVisible = not love.mouse.setVisible(false)
   map = {
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -77,6 +79,7 @@ function love.update (dt)
 			stepX = 1
 			sideDistX = (mapX + 1.0 - rayPosX) * deltaDistX
 		end
+
 		if (rayDirY < 0) then
 			stepY = -1
 			sideDistY = (rayPosY - mapY) * deltaDistY
@@ -195,23 +198,19 @@ function love.update (dt)
 			end
 		end
 
-    if love.keyboard.isDown("right") then
-    oldDirX = dirX
-    dirX = dirX * math.cos(-rotationSpeed) - dirY * math.sin(-rotationSpeed)
-    dirY = oldDirX * math.sin(-rotationSpeed) + dirY * math.cos(-rotationSpeed)
-    oldPlaneX = planeX
-    planeX = planeX * math.cos(-rotationSpeed) - planeY * math.sin(-rotationSpeed)
-    planeY = oldPlaneX * math.sin(-rotationSpeed) + planeY * math.cos(-rotationSpeed)
-  end
+    mX, mY = love.mouse.getPosition()
+    rotationSpeed = (w / 2 - mX) / sensitivity
 
-  if love.keyboard.isDown("left") then
     oldDirX = dirX
     dirX = dirX * math.cos(rotationSpeed) - dirY * math.sin(rotationSpeed)
     dirY = oldDirX * math.sin(rotationSpeed) + dirY * math.cos(rotationSpeed)
     oldPlaneX = planeX
     planeX = planeX * math.cos(rotationSpeed) - planeY * math.sin(rotationSpeed)
     planeY = oldPlaneX * math.sin(rotationSpeed) + planeY * math.cos(rotationSpeed)
-  end
+
+    if love.keyboard.isDown("escape") == false then
+      love.mouse.setPosition(w / 2, h / 2)
+    end
 end
 
     function love.draw()
