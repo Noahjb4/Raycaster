@@ -208,9 +208,10 @@ function love.update (dt)
     planeX = planeX * math.cos(rotationSpeed) - planeY * math.sin(rotationSpeed)
     planeY = oldPlaneX * math.sin(rotationSpeed) + planeY * math.cos(rotationSpeed)
 
-    if love.keyboard.isDown("escape") == false then
-      love.mouse.setPosition(w / 2, h / 2)
+    if love.keyboard.isDown("escape") then
+      love.event.quit()
     end
+    love.mouse.setPosition(w / 2, h / 2)
 end
 
     function love.draw()
