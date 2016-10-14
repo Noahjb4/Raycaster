@@ -44,6 +44,16 @@ planeY = 0.66
 drawScreenLineStart = {}
 drawScreenLineEnd = {}
 drawScreenLineColor = {}
+
+colors = {
+{255, 255, 255},
+{255, 0, 0},
+{0, 255, 0},
+{0, 0, 255},
+{255, 0, 255}
+
+
+}
 end
 
 function love.update (dt)
@@ -122,37 +132,12 @@ function love.update (dt)
       drawEnd = h - 1
     end
 
-    if (map[mapX][mapY] == 1) then
-				if (side == 1) then
-					drawScreenLineColor[x] = {127,0,0,255}
-				else
-					drawScreenLineColor[x] = {255,0,0,255}
-				end
-			elseif (map[mapX][mapY] == 2) then
-				if (side == 1) then
-					drawScreenLineColor[x] = {0,127,0,255}
-				else
-					drawScreenLineColor[x] = {0,255,0,255}
-				end
-			elseif (map[mapX][mapY] == 3) then
-				if (side == 1) then
-					drawScreenLineColor[x] = {0,0,127,255}
-				else
-					drawScreenLineColor[x] = {0,0,255,255}
-				end
-			elseif (map[mapX][mapY] == 4) then
-				if (side == 1) then
-					drawScreenLineColor[x] = {127,127,127,255}
-				else
-					drawScreenLineColor[x] = {255,255,255,255}
-				end
-			else
-				if (side == 1) then
-					drawScreenLineColor[x] = {127,127,0,255}
-				else
-					drawScreenLineColor[x] = {255,255,0,255}
-				end
-			end
+    drawScreenLineColor[x] = {unpack(colors[map[mapX][mapY]])}
+    if side == 1 then
+      drawScreenLineColor[x][1] = drawScreenLineColor[x][1] / 2
+      drawScreenLineColor[x][2] = drawScreenLineColor[x][2] / 2
+      drawScreenLineColor[x][3] = drawScreenLineColor[x][3] / 2
+    end
 
     drawScreenLineStart[x] = drawStart
     drawScreenLineEnd[x] = drawEnd
